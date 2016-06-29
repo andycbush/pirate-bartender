@@ -37,7 +37,7 @@ var pantry = {
     fruity: ["slice of orange", "dash of cassis", "cherry on top"]
 };
 
-var Order = function () {
+var Order = function (orderValues) {
     //get the user's choice of ingredients groups
     this.strong = orderValues[0];
     this.salty = orderValues[1];
@@ -53,9 +53,9 @@ STEP 2
 functions definitions
 ********************************************/
 
-var Drink = function (pantry, drinkOrder) {
+var Drink = function (pantry, drinkOrder) { //drinkOrder is created on line 128. drinkOrder = new Order(orderValues);
     var ingredientNumber,
-        ingredientsArray = [];
+        ingredientsArray = []; //two seperate arrays
 
     for (var userPreference in drinkOrder) {
         ingredientNumber = generateRandomNumber(0, 2);
@@ -83,11 +83,11 @@ var generateRandomNumber = function (min, max) {
 }
 
 //use if statements to piece together name conditionally based on the ingredients that comprise it
-var drinkNamer = function (concoction) {
+var drinkNamer = function (concoction) { //concoction is an object created from Drink. concoction = new Drink(pantry, drinkOrder);
     //split the concoction by space to be able to use the words
     var drinkNamerOutput = concoction[0].split(" ");
     //build the name of the new drink by getting the second word of the first ingredient and add extra words around it
-    return "yer Sparkly " + toTitleCase(drinkNamerOutput[drinkNamerOutput.length - 1]) + " Grog";
+    return "yer Sparkly " + toTitleCase(drinkNamerOutput[drinkNamerOutput.length - 1]) + " Grog"; //could you use "toTitleCase(drinkNamerOutput[2])"?
 
 };
 
@@ -116,9 +116,9 @@ $(document).ready(function () {
             var valueToBePushed = "";
 
             if ($(this).val() === 'yes') {
-                valueToBePushed = "true";
+                valueToBePushed = true;
             } else {
-                valueToBePushed = "false";
+                valueToBePushed = false;
             }
 
             orderValues.push(valueToBePushed);
