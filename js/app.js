@@ -128,21 +128,28 @@ $(document).ready(function () {
         drinkOrder = new Order(orderValues); // creae new order from DOM
         concoction = new Drink(pantry, drinkOrder); // mix drink with Drink constructor
 
-        //build the chosen ingredients from the ingredients array
-        var buildTheHtmlOuput = "";
-        $.each(concoction, function (key, value) {
-            buildTheHtmlOuput += "<li>" + "<li>" + value + "</li>";
-        });
 
-        //show the output container
-        $('#results').show();
+        //if there is atleast one ingredient
+        if (concoction.length > 0) {
+            //build the chosen ingredients from the ingredients array
+            var buildTheHtmlOuput = "";
+            $.each(concoction, function (key, value) {
+                buildTheHtmlOuput += "<li>" + "<li>" + value + "</li>";
+            });
 
-        //populate it with the ingredients
-        $("#results ul").html(buildTheHtmlOuput);
+            //show the output container
+            $('#results').show();
 
-        //name the customer's beverage with drinkNamer();
-        $("#results h3").html("Here be " + drinkNamer(concoction) + ", ye scurvy dog!");
+            //populate it with the ingredients
+            $("#results ul").html(buildTheHtmlOuput);
 
+            //name the customer's beverage with drinkNamer();
+            $("#results h3").html("Here be " + drinkNamer(concoction) + ", ye scurvy dog!");
+        }
+        //if there are no ingredients
+        else {
+            alert('Pick something for your poison!');
+        }
     }); //closes $('form').on('submit', function (event) {
 
     //close document ready
